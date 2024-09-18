@@ -12,7 +12,6 @@ h1, h2, h3, h4, h5, h6, p {
 .mainNav{
 height: 50px;
 background-color: black;
-color: white;
 padding: 20px;
 
 }
@@ -22,12 +21,18 @@ flex-direction: row;
 align-items: center;
 height: 100%;
 width: 100%;
+
 }
 .mainNav ul li{
   list-style: none;
 margin-left: 20px;
+
 }
 .mainNav ul li a {
   text-decoration: none;
   font-size: 20px;
+  color: white;
+}
+.mainNav ul li a:active{
+  font-weight: bold;
 }
