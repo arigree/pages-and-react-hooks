@@ -27,7 +27,7 @@ export default function Pokemon() {
   
 
   const [pokemonEncounters, setPokemonEncounters] = useState([]);
-  console.log("pokemonEncounters ", pokemonEncounters);
+  // console.log("pokemonEncounters ", pokemonEncounters);
 
   function changeSearchTerm(e) {
     setSearchTerm(e.currentTarget.value.toLowerCase());
@@ -82,7 +82,7 @@ export default function Pokemon() {
         <input type="button" value="Search" onClick={searchForPokemonByName} />
       </div>
       <h3>{pokemon.name}</h3>
-      <img src={pokemon.sprites.front_default} />
+      <img src={pokemon.sprites.front_default}/>
     </main>
   );
 }
