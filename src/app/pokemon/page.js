@@ -1,7 +1,7 @@
 "use client";
 
 import pokeStyles from "./pokemon.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //Pokemon data
 /**
@@ -19,14 +19,20 @@ export default function Pokemon() {
   /**
    * @type {[pokemonApiObject, Function]}
    */
-  const [pokemon, setPokemon] = useState({ sprites: {}});
+  const [pokemon, setPokemon] = useState({ sprites: {} });
   /**
    * @type {[String, Function]}
    */
   const [searchTerm, setSearchTerm] = useState("");
+  
+
+  const [pokemonEncounters, setPokemonEncounters] = useState([]);
+  console.log("pokemonEncounters ", pokemonEncounters);
+
   function changeSearchTerm(e) {
     setSearchTerm(e.currentTarget.value.toLowerCase());
   }
+
   async function searchForPokemonByName() {
     try {
       const rawData = await fetch(
@@ -36,9 +42,31 @@ export default function Pokemon() {
       setPokemon(pokeDataFormatted);
       console.log(pokeDataFormatted);
     } catch (error) {
-      setPokemon({name:searchTerm, sprites:{}})
+      setPokemon({ name: searchTerm, sprites: {} });
     }
   }
+  useEffect(
+    function () {
+      if (pokemon.id) {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}/encounters`)
+          .then((rawData) => {
+            return rawData.json();
+          })
+          .then((pokeEncounters) => {
+            setPokemonEncounters(pokeEncounters)
+            // console.log(pokeEncounters);
+          })
+          
+          .catch((e) => {
+            setPokemonEncounters([]);
+            // console.warn(e);
+          });
+      }else {
+        setPokemonEncounters([]);
+      }
+    },
+    [pokemon]
+  );
 
   return (
     <main>
@@ -54,7 +82,7 @@ export default function Pokemon() {
         <input type="button" value="Search" onClick={searchForPokemonByName} />
       </div>
       <h3>{pokemon.name}</h3>
-      <img src={pokemon.sprites.front_default}/>
+      <img src={pokemon.sprites.front_default} />
     </main>
   );
 }
