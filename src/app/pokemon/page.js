@@ -68,6 +68,8 @@ export default function Pokemon() {
     [pokemon]
   );
 
+  console.count("Viewed page");
+
   return (
     <main>
       <h1>Pokemon Page</h1>
