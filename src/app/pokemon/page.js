@@ -25,7 +25,7 @@ export default function Pokemon() {
    */
   const [searchTerm, setSearchTerm] = useState("");
   function changeSearchTerm(e) {
-    setSearchTerm(e.currentTarget.value.toLowerCare());
+    setSearchTerm(e.currentTarget.value.toLowerCase());
   }
   async function searchForPokemonByName() {
     try {
